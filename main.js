@@ -52,31 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 4. Form Submission Handling (Mock)
-    const contactForm = document.getElementById('portfolio-contact');
-    if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const btn = contactForm.querySelector('button');
-            const originalText = btn.innerText;
-            
-            btn.innerText = 'Sending...';
-            btn.disabled = true;
-            
-            // Simulate API call
-            setTimeout(() => {
-                btn.innerText = 'Message Sent!';
-                btn.style.background = '#10b981'; // Success green
-                contactForm.reset();
-                
-                setTimeout(() => {
-                    btn.innerText = originalText;
-                    btn.style.background = 'var(--accent-primary)';
-                    btn.disabled = false;
-                }, 3000);
-            }, 1500);
-        });
-    }
+    // 4. Form Submission Handling
+    // (Handled by @formspree/ajax via data attributes and CDN script)
 
     // 5. Card Tilt Effect (Subtle)
     const cards = document.querySelectorAll('.project-card, .skill-item');
@@ -109,5 +86,26 @@ document.addEventListener('DOMContentLoaded', () => {
         if (mesh) {
             mesh.style.transform = `translate(${mouseX * 20}px, ${mouseY * 20}px)`;
         }
+    });
+
+    // 7. Back to Top Button
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
+            backToTop.style.display = 'flex';
+            setTimeout(() => backToTop.style.opacity = '1', 10);
+        } else {
+            backToTop.style.opacity = '0';
+            setTimeout(() => {
+                if (window.scrollY <= 500) backToTop.style.display = 'none';
+            }, 400);
+        }
+    });
+
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     });
 });
