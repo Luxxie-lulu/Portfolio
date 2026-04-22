@@ -108,4 +108,39 @@ document.addEventListener('DOMContentLoaded', () => {
             behavior: 'smooth'
         });
     });
+
+    // 8. Cinematic Reel — Play / Pause + Progress Bar
+    const video       = document.getElementById('campaignVideo');
+    const playBtn     = document.getElementById('reelPlayBtn');
+    const playIcon    = document.getElementById('playIcon');
+    const progressBar = document.getElementById('reelProgress');
+
+    const pauseSVG = `<svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>`;
+    const playSVG  = `<svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>`;
+
+    if (video && playBtn) {
+        playBtn.addEventListener('click', () => {
+            if (video.paused) {
+                video.play();
+                playBtn.classList.add('playing');
+                playIcon.innerHTML = pauseSVG;
+            } else {
+                video.pause();
+                playBtn.classList.remove('playing');
+                playIcon.innerHTML = playSVG;
+            }
+        });
+
+        video.addEventListener('timeupdate', () => {
+            if (video.duration) {
+                progressBar.style.width = ((video.currentTime / video.duration) * 100) + '%';
+            }
+        });
+
+        video.addEventListener('ended', () => {
+            playBtn.classList.remove('playing');
+            playIcon.innerHTML = playSVG;
+        });
+    }
 });
+

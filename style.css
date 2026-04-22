@@ -583,3 +583,207 @@ nav {
         padding: 60px 20px;
     }
 }
+
+/* ─── Cinematic Reel Section ──────────────────────────────────────── */
+#reel {
+    padding: var(--section-padding);
+    overflow: hidden;
+}
+
+.reel-container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 64px;
+}
+
+/* Header text block */
+.reel-header {
+    text-align: center;
+}
+
+.reel-eyebrow {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent-primary);
+    margin-bottom: 16px;
+    opacity: 0.85;
+}
+
+.reel-subtitle {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    margin-top: 10px;
+    letter-spacing: 0.3px;
+}
+
+/* Stage — holds the glow orbs + frame */
+.reel-stage {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* Ambient glow orbs */
+.reel-glow {
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    z-index: 0;
+    animation: reelPulse 6s ease-in-out infinite alternate;
+}
+
+.reel-glow--left {
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.18) 0%, transparent 70%);
+    left: 50%;
+    transform: translateX(-320px);
+}
+
+.reel-glow--right {
+    background: radial-gradient(circle, rgba(255, 77, 77, 0.12) 0%, transparent 70%);
+    right: 50%;
+    transform: translateX(320px);
+    animation-delay: -3s;
+}
+
+@keyframes reelPulse {
+    from { opacity: 0.7; transform: translateX(-320px) scale(1); }
+    to   { opacity: 1;   transform: translateX(-320px) scale(1.08); }
+}
+@keyframes reelPulseRight {
+    from { opacity: 0.6; transform: translateX(320px) scale(1); }
+    to   { opacity: 1;   transform: translateX(320px) scale(1.08); }
+}
+.reel-glow--right {
+    animation-name: reelPulseRight;
+}
+
+/* Portrait video frame */
+.reel-frame {
+    position: relative;
+    z-index: 1;
+    width: min(360px, 88vw);
+    aspect-ratio: 9 / 16;
+    border-radius: 28px;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    box-shadow:
+        0 0 0 1px rgba(212, 175, 55, 0.08),
+        0 40px 100px rgba(0, 0, 0, 0.9),
+        0 0 80px rgba(212, 175, 55, 0.12);
+    cursor: pointer;
+    transition: box-shadow 0.5s ease, transform 0.5s ease;
+    background: #0a0a0a;
+}
+
+.reel-frame:hover {
+    box-shadow:
+        0 0 0 1px rgba(212, 175, 55, 0.2),
+        0 50px 120px rgba(0, 0, 0, 0.95),
+        0 0 100px rgba(212, 175, 55, 0.22);
+    transform: scale(1.015);
+}
+
+.reel-frame video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Play / Pause button overlay */
+.reel-play-btn {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.35);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease, opacity 0.3s ease;
+    z-index: 2;
+}
+
+.reel-play-btn.playing {
+    background: transparent;
+    opacity: 0;
+}
+
+.reel-frame:hover .reel-play-btn.playing {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.play-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: rgba(212, 175, 55, 0.15);
+    border: 2px solid rgba(212, 175, 55, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #d4af37;
+    backdrop-filter: blur(6px);
+    transition: transform 0.3s ease, background 0.3s ease;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+}
+
+.reel-play-btn:hover .play-icon {
+    transform: scale(1.12);
+    background: rgba(212, 175, 55, 0.25);
+}
+
+/* Progress bar */
+.reel-progress-wrap {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.08);
+    z-index: 3;
+}
+
+.reel-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+    transition: width 0.25s linear;
+}
+
+/* Corner badge */
+.reel-badge {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent-primary);
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    padding: 5px 12px;
+    border-radius: 100px;
+    backdrop-filter: blur(6px);
+    z-index: 3;
+}
+
+@media (max-width: 600px) {
+    .reel-glow { display: none; }
+    .reel-frame { width: 92vw; border-radius: 20px; }
+}

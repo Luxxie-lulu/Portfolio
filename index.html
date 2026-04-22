@@ -17,6 +17,7 @@
             <ul class="nav-links">
                 <li><a href="#hero">Home</a></li>
                 <li><a href="#about">About</a></li>
+                <li><a href="#reel">Reel</a></li>
                 <li><a href="#projects">Work</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#skills">Skills</a></li>
@@ -46,6 +47,49 @@
                 <div class="reveal">
                     <a href="#projects" class="btn btn-primary">View My Work</a>
                     <a href="tiffany_pena_resume.pdf" class="btn" target="_blank" style="border: 1px solid var(--glass-border); margin-left: 15px;">Download CV</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cinematic Reel Section -->
+        <section id="reel">
+            <div class="reel-container">
+                <div class="reel-header reveal">
+                    <span class="reel-eyebrow">✦ Campaign</span>
+                    <h2 class="section-title" style="margin-bottom: 12px;">See It In <span style="color: var(--accent-primary)">Motion.</span></h2>
+                    <p class="reel-subtitle">A creative campaign that blends design with technology.</p>
+                </div>
+
+                <div class="reel-stage reveal">
+                    <!-- Ambient glow layers -->
+                    <div class="reel-glow reel-glow--left"></div>
+                    <div class="reel-glow reel-glow--right"></div>
+
+                    <!-- Portrait video frame -->
+                    <div class="reel-frame" id="reelFrame">
+                        <video
+                            id="campaignVideo"
+                            src="pomelli_creative_video_9_16_0422.mp4"
+                            playsinline
+                            preload="metadata"
+                            loop
+                        ></video>
+
+                        <!-- Custom play/pause overlay -->
+                        <button class="reel-play-btn" id="reelPlayBtn" aria-label="Play video">
+                            <span class="play-icon" id="playIcon">
+                                <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+                            </span>
+                        </button>
+
+                        <!-- Progress bar -->
+                        <div class="reel-progress-wrap">
+                            <div class="reel-progress-bar" id="reelProgress"></div>
+                        </div>
+
+                        <!-- Corner badge -->
+                        <div class="reel-badge">Pomelli Creative</div>
+                    </div>
                 </div>
             </div>
         </section>
